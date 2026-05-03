@@ -27,4 +27,9 @@ public final class Expansion_iDisguise extends DisguiseExpansion {
 
         return this.disguiseHandler;
     }
+
+    @Override
+    public void afterEnable() {
+        new DisguiseDamageListener(this).register();
+    }
 }
