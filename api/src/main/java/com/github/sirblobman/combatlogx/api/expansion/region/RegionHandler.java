@@ -161,7 +161,7 @@ public abstract class RegionHandler<RE extends RegionExpansion> {
         e.setCancelled(true);
 
         if (isGliding(player)) {
-            player.setGliding(false);
+            setGliding(player, false);
             Vector zero = new Vector(0.0D, 0.0D, 0.0D);
             player.setVelocity(zero);
         }
@@ -203,7 +203,25 @@ public abstract class RegionHandler<RE extends RegionExpansion> {
             return false;
         }
 
-        return player.isGliding();
+        // Reflective to allow compiling against 1.8.8 (method added in 1.9)
+        try {
+            Object result = Player.class.getMethod("isGliding").invoke(player);
+            return Boolean.TRUE.equals(result);
+        } catch (ReflectiveOperationException ex) {
+            return false;
+        }
+    }
+
+    private void setGliding(@NotNull Player player, boolean gliding) {
+        int minorVersion = VersionUtility.getMinorVersion();
+        if (minorVersion < 9) {
+            return;
+        }
+
+        try {
+            Player.class.getMethod("setGliding", boolean.class).invoke(player, gliding);
+        } catch (ReflectiveOperationException ignored) {
+        }
     }
 
     public abstract String getEntryDeniedMessagePath(@NotNull TagType tagType);

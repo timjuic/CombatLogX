@@ -34,7 +34,7 @@ include("expansion:cheat-prevention")
 // End Crystals
 include("expansion:end-crystal:legacy")
 include("expansion:end-crystal:modern")
-include("expansion:end-crystal:moderner")
+// include("expansion:end-crystal:moderner") // directory missing in repo
 include("expansion:end-crystal")
 
 // Compatibility expansions
@@ -47,9 +47,9 @@ include("expansion:compatibility:CMI")
 include("expansion:compatibility:CrackShot")
 include("expansion:compatibility:CrashClaim")
 include("expansion:compatibility:EssentialsX")
-include("expansion:compatibility:FabledSkyBlock")
+// include("expansion:compatibility:FabledSkyBlock") // requires private nexus credentials
 include("expansion:compatibility:Factions")
-include("expansion:compatibility:FeatherBoard")
+// include("expansion:compatibility:FeatherBoard") // requires private nexus credentials
 include("expansion:compatibility:GriefDefender")
 include("expansion:compatibility:GriefPrevention")
 include("expansion:compatibility:HuskHomes")

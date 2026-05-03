@@ -24,10 +24,29 @@ subprojects {
         maven("https://nexus.sirblobman.xyz/public/")
     }
 
+    // Each submodule may pin the Spigot API version it compiles against via its own
+    // gradle.properties (version.spigot=...). Default to 1.8.8 so the aggregate plugin
+    // stays compatible with 1.8.8 servers. Modules that call newer API must set their
+    // own higher value and guard the calls at runtime.
+    val moduleSpigotVersion: String =
+        (findProperty("version.spigot") as String?) ?: "1.8.8-R0.1-SNAPSHOT"
+
     dependencies {
         compileOnly("org.jetbrains:annotations:26.0.2-1") // JetBrains Annotations
-        compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT") // Base Spigot API
+        compileOnly("org.spigotmc:spigot-api:$moduleSpigotVersion") // Base Spigot API
         compileOnly("com.github.sirblobman.api:core:2.9-SNAPSHOT") // BlueSlimeCore
+    }
+
+    // Spigot 1.8.8's pom references bungeecord-chat:1.8-SNAPSHOT which was purged from
+    // the Spigot snapshots repo. Force a still-available version; the chat API is
+    // backwards compatible so this is safe for 1.8.8 runtime.
+    configurations.all {
+        resolutionStrategy.eachDependency {
+            if (requested.group == "net.md-5" && requested.name == "bungeecord-chat") {
+                useVersion("1.16-R0.4")
+                because("bungeecord-chat:1.8-SNAPSHOT no longer exists in any Maven repo")
+            }
+        }
     }
 
     tasks.withType<JavaCompile> {

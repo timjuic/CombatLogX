@@ -39,9 +39,9 @@ dependencies {
     expansion(project(":expansion:compatibility:CrackShot"))
     expansion(project(":expansion:compatibility:CrashClaim"))
     expansion(project(":expansion:compatibility:EssentialsX"))
-    expansion(project(":expansion:compatibility:FabledSkyBlock"))
+    // expansion(project(":expansion:compatibility:FabledSkyBlock")) // requires private nexus credentials
     expansion(project(":expansion:compatibility:Factions"))
-    expansion(project(":expansion:compatibility:FeatherBoard"))
+    // expansion(project(":expansion:compatibility:FeatherBoard")) // requires private nexus credentials
     expansion(project(":expansion:compatibility:GriefDefender"))
     expansion(project(":expansion:compatibility:GriefPrevention"))
     expansion(project(":expansion:compatibility:HuskHomes"))

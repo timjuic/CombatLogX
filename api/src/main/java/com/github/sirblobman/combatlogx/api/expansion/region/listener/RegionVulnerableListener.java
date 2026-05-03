@@ -86,8 +86,15 @@ public final class RegionVulnerableListener extends RegionExpansionListener {
         return (minorVersion < 11 ? getPassengersLegacy(entity) : getPassengersModern(entity));
     }
 
+    @SuppressWarnings("unchecked")
     private @NotNull List<Entity> getPassengersModern(@NotNull Entity entity) {
-        List<Entity> passengerList = entity.getPassengers();
+        // Reflective to allow compiling against 1.8.8 (Entity#getPassengers added in 1.11)
+        List<Entity> passengerList;
+        try {
+            passengerList = (List<Entity>) Entity.class.getMethod("getPassengers").invoke(entity);
+        } catch (ReflectiveOperationException ex) {
+            return Collections.emptyList();
+        }
         if (passengerList == null) {
             return Collections.emptyList();
         }
