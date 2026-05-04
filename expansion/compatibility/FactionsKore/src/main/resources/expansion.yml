@@ -1,0 +1,10 @@
+name: "${expansionName}"
+prefix: "${expansionPrefix}"
+description: "${expansionDescription}"
+
+main: "combatlogx.expansion.compatibility.factionskore.Expansion_FactionsKore"
+version: "1.0"
+author: "tjuic20-foi"
+
+plugin-depend:
+  - "FactionsKore"

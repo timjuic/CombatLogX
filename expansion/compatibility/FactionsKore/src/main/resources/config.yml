@@ -1,0 +1,13 @@
+# Configuration for the FactionsKore compatibility expansion.
+
+# Which stacked mob types should tag the killer when they're killed?
+# FactionsKore intercepts attacks before Bukkit's damage events fire, so this is the only place
+# you can filter which stacker kills count as combat for CombatLogX.
+# Use "*" to allow all mob types.
+# Valid entity types: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+mob-list:
+  - SILVERFISH
+
+# Treat the list above as a deny-list instead of an allow-list.
+# Default: false
+mob-list-inverted: false

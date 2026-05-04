@@ -49,6 +49,7 @@ include("expansion:compatibility:CrashClaim")
 include("expansion:compatibility:EssentialsX")
 // include("expansion:compatibility:FabledSkyBlock") // requires private nexus credentials
 include("expansion:compatibility:Factions")
+include("expansion:compatibility:FactionsKore")
 // include("expansion:compatibility:FeatherBoard") // requires private nexus credentials
 include("expansion:compatibility:GriefDefender")
 include("expansion:compatibility:GriefPrevention")
