@@ -1,0 +1,25 @@
+# Configuration for the iDisguise compatibility expansion.
+
+# When this player is tagged into combat by CombatLogX (via PvP, Mob Tagger, Damage Tagger, etc.),
+# they will be auto-undisguised. This is the default behavior and matches the legacy expansion.
+# To disable a specific tag source (e.g. only undisguise on PvP, not mob combat), use the
+# corresponding toggle in the relevant CombatLogX expansion (Mob Tagger / Damage Tagger).
+
+# Direct triggers below run independent of CombatLogX's combat-tag system. They are useful when
+# you've disabled certain tag categories but still want disguised players to lose the disguise
+# when they touch combat.
+
+# Undisguise immediately when this player attacks any mob, regardless of whether they get tagged.
+# Default: false
+undisguise-on-direct-attack-mob: false
+
+# Undisguise immediately when this player is attacked by any mob, regardless of whether they get tagged.
+# Default: false
+undisguise-on-direct-attacked-by-mob: false
+
+# Grace period (in seconds) after a player disguises during which auto-undisguise will be skipped.
+# Lets players verify their disguise looks right without instantly losing it on the first tick of damage.
+# Set to 0 to disable. The grace period applies to ALL auto-undisguise paths in this expansion
+# (combat tag, direct triggers, and disguised-target hits) but does NOT block manual /undisguise.
+# Default: 0
+grace-period-seconds: 0

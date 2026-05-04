@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import com.github.sirblobman.combatlogx.api.expansion.disguise.DisguiseHandler;
 
+import de.luisagrether.idisguise.api.EventCancelledException;
 import de.luisagrether.idisguise.iDisguise;
 
 public final class DisguiseHandler_iDisguise extends DisguiseHandler<Expansion_iDisguise> {
@@ -16,12 +17,25 @@ public final class DisguiseHandler_iDisguise extends DisguiseHandler<Expansion_i
     @Override
     public boolean hasDisguise(@NotNull Player player) {
         iDisguise plugin = iDisguise.getInstance();
-        return plugin.isDisguised(player);
+        if (!plugin.isDisguised(player)) return false;
+
+        Expansion_iDisguise expansion = getExpansion();
+        DisguiseGraceTracker grace = expansion.getGraceTracker();
+        long graceMillis = expansion.getConfiguration().getGraceMillis();
+        if (grace != null && grace.isInGracePeriod(player, graceMillis)) {
+            return false;
+        }
+
+        return true;
     }
 
     @Override
     public void removeDisguise(@NotNull Player player) {
         iDisguise plugin = iDisguise.getInstance();
-        plugin.undisguise(player);
+        try {
+            plugin.undisguise(player);
+        } catch (EventCancelledException ex) {
+            // Another listener cancelled the undisguise; nothing to do.
+        }
     }
 }
