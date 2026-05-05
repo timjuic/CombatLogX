@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
+import com.github.sirblobman.api.language.LanguageManager;
 import com.github.sirblobman.combatlogx.api.expansion.ExpansionListener;
 
 import de.luisagrether.idisguise.api.EventCancelledException;
@@ -57,6 +58,8 @@ public final class DirectUndisguiseListener extends ExpansionListener {
         try {
             plugin.undisguise(player);
             printDebug("Direct-undisguised " + player.getName() + ".");
+            LanguageManager languageManager = getLanguageManager();
+            languageManager.sendMessageWithPrefix(player, "expansion.disguise-compatibility.remove-disguise");
         } catch (EventCancelledException ex) {
             printDebug("Undisguise was cancelled for " + player.getName() + ".");
         }
