@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
 import com.github.sirblobman.api.language.LanguageManager;
 import com.github.sirblobman.combatlogx.api.expansion.ExpansionListener;
@@ -43,6 +45,13 @@ public final class DirectUndisguiseListener extends ExpansionListener {
                 && !(damager instanceof Player)) {
             tryUndisguise((Player) damaged);
         }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onEnderpearlLand(PlayerTeleportEvent e) {
+        if (!this.expansion.getConfiguration().isUndisguiseOnEnderpearlLand()) return;
+        if (e.getCause() != TeleportCause.ENDER_PEARL) return;
+        tryUndisguise(e.getPlayer());
     }
 
     private void tryUndisguise(@NotNull Player player) {

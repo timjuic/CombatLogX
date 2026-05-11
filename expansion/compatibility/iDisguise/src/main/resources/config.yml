@@ -17,6 +17,12 @@ undisguise-on-direct-attack-mob: false
 # Default: false
 undisguise-on-direct-attacked-by-mob: false
 
+# Undisguise the player when they land an ender pearl. This closes off the most common combat-escape
+# trick used by disguised players (pearl out of view, stay disguised). The grace period below
+# still applies, so a freshly disguised player won't lose the disguise to their own positioning pearl.
+# Default: true
+undisguise-on-enderpearl-land: true
+
 # Grace period (in seconds) after a player disguises during which auto-undisguise will be skipped.
 # Lets players verify their disguise looks right without instantly losing it on the first tick of damage.
 # Set to 0 to disable. The grace period applies to ALL auto-undisguise paths in this expansion
